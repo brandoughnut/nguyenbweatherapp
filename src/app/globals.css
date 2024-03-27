@@ -2,8 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Roboto-Regular;
+  src: url(../fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Thin;
+  src: url(../fonts/Roboto/Roboto-Thin.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(../fonts/Roboto/Roboto-Bold.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Medium;
+  src: url(../fonts/Roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Light;
+  src: url(../fonts/Roboto/Roboto-Light.ttf);
+}
+
 .BG {
   background-image: url(../assets/weatherbg.png);
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.robotoRegular {
+  font-family: Roboto-Regular;
+}
+
+.robotoThin {
+  font-family: Roboto-Thin;
+}
+
+.robotoBold {
+  font-family: Roboto-Bold;
+}
+
+.robotoMedium {
+  font-family: Roboto-Medium;
+}
+
+.robotoLight {
+  font-family: Roboto-Light;
 }
