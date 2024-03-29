@@ -6,7 +6,7 @@ import Image, { StaticImageData } from "next/image";
 const FiveDayForecastComponent = (prop: {date:string, icon:StaticImageData, forecast:string, high:number, low:number}) => {
   return (
     <div className="grid grid-cols-5 xl:grid-cols-1 justify-center">
-      <h1 className="text-[20px] md:text-[40px] my-auto robotoMedium">{prop.date}</h1>
+      <h1 className="text-[17px] md:text-[40px] my-auto robotoMedium">{prop.date}</h1>
       <div className="grid justify-center">
         <Image
           className="h-[45px] w-[45px] md:h-[70px] md:w-[70px] xl:h-[130px] xl:w-[130px] my-[20px]"

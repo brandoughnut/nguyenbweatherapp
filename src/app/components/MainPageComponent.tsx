@@ -88,6 +88,7 @@ const MainPageComponent = () => {
           setToggleFavorite(favorite);
         }
         setLocalStorageItems(data1[0].name);
+
         const options: ITime = {
           hour: "numeric",
           hour12: false,
@@ -95,6 +96,7 @@ const MainPageComponent = () => {
         let time = new Intl.DateTimeFormat("en-US", options).format(
           new Date(data2.dt * 1000 + data2.timezone * 1000)
         );
+
         if (parseInt(time) + 7 > 6 && parseInt(time) + 7 < 21) {
           setBackground("BG");
         } else {
@@ -616,7 +618,7 @@ const MainPageComponent = () => {
               <div className="my-[35px] text-[30px] robotoMedium ">
                 <h1>Favorites</h1>
               </div>
-              <div className="overflow-y-auto h-[875px]">
+              <div className="overflow-y-auto h-[80vh]">
                 {favoriteDisplay.map((data, idx:number) => {
                 return(
                   <div key={idx} onClick={() => {
@@ -637,23 +639,25 @@ const MainPageComponent = () => {
         >
           <div className="grid grid-cols-1 xl:grid-cols-2">
             <div className="mt-10 text-center xl:text-start">
-              <div className="text-[40px] md:text-[85px] whitespace-nowrap robotoRegular">
+              <div className="text-[30px] md:text-[85px] xl:whitespace-nowrap robotoRegular">
                 {currentLocation}
-                <Image
-                  onClick={()=> {
+                <button onClick={()=> {
                     handleFavorites();
                     reRenderPage();
-                  }}
-                  className="h-8 w-8 md:h-[74px] md:w-[74px] ms-5 md:ms-8 mb-3 inline-flex cursor-pointer"
+                  }}>
+                  <Image
+                  className="h-8 w-8 md:h-[74px] ms-4 xl:ms-8 md:w-[74px]"
                   src={toggleFavorite}
                   alt="favorite icon"
-                />
+                  />
+                </button>
+                
               </div>
               <p className="text-[20px] md:text-[30px] robotoRegular">
                 {currentDay}
               </p>
               <div className="hidden xl:block mt-3 xl:mt-[41px]">
-                <div className="text-[30px] md:text-[70px] robotoRegular truncate">
+                <div className="text-[20px] md:text-[70px] robotoRegular truncate">
                   <Image
                     className="h-[125px] w-[125px] md:h-[200px] md:w-[200px] xl:h-[250px] xl:w-[250px] mx-auto xl:mx-0"
                     src={currentIcon}
@@ -674,11 +678,11 @@ const MainPageComponent = () => {
                 </p>
               </div>
               <div className="mt-3 xl:mt-[41px] text-center block xl:hidden">
-                <div className="text-[30px] md:text-[70px] robotoRegular truncate">
+                <div className="text-[20px] md:text-[70px] robotoRegular truncate">
                   {currentForecast}
                 </div>
               </div>
-              <div className="text-[30px] md:text-[70px] mt-5 robotoLight">
+              <div className="text-[20px] md:text-[70px] mt-5 robotoLight">
                 <div className="text-center">
                   {`H:${currentHigh}°`}
                   <span className="ms-10">{`L:${currentLow}°`}</span>
@@ -755,7 +759,7 @@ const MainPageComponent = () => {
             </svg>
             <span className="sr-only">Close menu</span>
           </button>
-          <div className="overflow-y-auto h-[800px]">
+          <div className="overflow-y-auto h-[90vh]">
             {favoriteDisplay.map((data, idx:number) => {
                 return(
                   <div key={idx} onClick={() => {
