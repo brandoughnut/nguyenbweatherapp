@@ -78,68 +78,70 @@ const MainPageComponent = () => {
     if (savedInput === "") {
       navigator.geolocation.getCurrentPosition(success, errorFunc);
     } else {
-      const currentWeatherInfo = async () => {
-        const data1 = await searchWeather(savedInput);
-        const data2 = await getCurrentWeather(data1[0].lat, data1[0].lon);
-        const data3 = await getFiveDayForecast(data1[0].lat, data1[0].lon);
-        if (!getLocalStorage().includes(`${data1[0].name}`)) {
-          setToggleFavorite(unfavorite);
-        } else {
-          setToggleFavorite(favorite);
-        }
-        setLocalStorageItems(data1[0].name);
-
-        const options: ITime = {
-          hour: "numeric",
-          hour12: false,
-        };
-        let time = new Intl.DateTimeFormat("en-US", options).format(
-          new Date(data2.dt * 1000 + data2.timezone * 1000)
-        );
-
-        if (parseInt(time) + 7 > 6 && parseInt(time) + 7 < 21) {
-          setBackground("BG");
-        } else {
-          setBackground("darkBG");
-        }
-        setCurrentForecast(data2.weather[0].description);
-        setCurrentLocation(data1[0].name);
-        setCurrentTemp(Math.round(data2.main.temp));
-        setCurrentHigh(Math.round(data2.main.temp_max));
-        setCurrentLow(Math.round(data2.main.temp_min));
-        weatherConditions(
-          data2.weather[0].description,
-          data2.weather[0].main,
-          setCurrentIcon,
-          parseInt(time) + 7
-        );
-        stateNames(data1[0].name, data1[0].state, data1[0].country);
-        fiveDay(data3);
-        currentTime(data2.dt, data2.timezone);
-      };
       currentWeatherInfo();
-    }
-    const weatherFavorites = async () => {
-      let favorites:string[] = getLocalStorage();
-      let favArray:IWeatherObject[] = [];
-      for(let i = 0; i<favorites.length; i++){
-        const promise:ICurrentWeatherName[] = await searchWeather(favorites[i]);
-        const data:ICurrentWeather = await getCurrentWeather(promise[0].lat, promise[0].lon);
-        let weatherObject:IWeatherObject = {
-          name:promise[0].name,
-          forecast:data.weather[0].main,
-          temp:data.main.temp,
-          high:data.main.temp_max,
-          low:data.main.temp_min
-        }
-        favArray.push(weatherObject);
-      }
-      setFavoriteDisplay(favArray);
-      return favoriteDisplay;
     }
     weatherFavorites();
     setInput("");
   }, [reRender]);
+
+  const currentWeatherInfo = async () => {
+    const data1 = await searchWeather(savedInput);
+    const data2 = await getCurrentWeather(data1[0].lat, data1[0].lon);
+    const data3 = await getFiveDayForecast(data1[0].lat, data1[0].lon);
+    if (!getLocalStorage().includes(`${data1[0].name}`)) {
+      setToggleFavorite(unfavorite);
+    } else {
+      setToggleFavorite(favorite);
+    }
+    setLocalStorageItems(data1[0].name);
+
+    const options: ITime = {
+      hour: "numeric",
+      hour12: false,
+    };
+    let time = new Intl.DateTimeFormat("en-US", options).format(
+      new Date(data2.dt * 1000 + data2.timezone * 1000)
+    );
+
+    if (parseInt(time) + 7 > 6 && parseInt(time) + 7 < 21) {
+      setBackground("BG");
+    } else {
+      setBackground("darkBG");
+    }
+    setCurrentForecast(data2.weather[0].description);
+    setCurrentLocation(data1[0].name);
+    setCurrentTemp(Math.round(data2.main.temp));
+    setCurrentHigh(Math.round(data2.main.temp_max));
+    setCurrentLow(Math.round(data2.main.temp_min));
+    weatherConditions(
+      data2.weather[0].description,
+      data2.weather[0].main,
+      setCurrentIcon,
+      parseInt(time) + 7
+    );
+    stateNames(data1[0].name, data1[0].state, data1[0].country);
+    fiveDay(data3);
+    currentTime(data2.dt, data2.timezone);
+  };
+
+  const weatherFavorites = async () => {
+    let favorites:string[] = getLocalStorage();
+    let favArray:IWeatherObject[] = [];
+    for(let i = 0; i<favorites.length; i++){
+      const promise:ICurrentWeatherName[] = await searchWeather(favorites[i]);
+      const data:ICurrentWeather = await getCurrentWeather(promise[0].lat, promise[0].lon);
+      let weatherObject:IWeatherObject = {
+        name:promise[0].name,
+        forecast:data.weather[0].main,
+        temp:data.main.temp,
+        high:data.main.temp_max,
+        low:data.main.temp_min
+      }
+      favArray.push(weatherObject);
+    }
+    setFavoriteDisplay(favArray);
+    return favoriteDisplay;
+  }
 
   const success = async (position:IGeoLocation) => {
     let lon = position.coords.longitude;
