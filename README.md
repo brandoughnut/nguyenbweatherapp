@@ -1,3 +1,10 @@
+Name: Brandon Nguyen
+Date: 3/29/2024
+Lab Name: Weather App Rebuild
+Brief Description: We had to recreate our own weather app using next js and tailwind
+Peer Reviewer: 
+Peer Review Comment: 
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

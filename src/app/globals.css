@@ -33,6 +33,12 @@
   background-repeat: no-repeat;
 }
 
+.darkBG {
+  background-image: url(../assets/nightweather.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .robotoRegular {
   font-family: Roboto-Regular;
 }
