@@ -146,7 +146,6 @@ const MainPageComponent = () => {
   const success = async (position:IGeoLocation) => {
     let lon = position.coords.longitude;
     let lat = position.coords.latitude;
-    console.log(`${lon}, ${lat}`);
 
     const data1 = await getCurrentWeatherName(lat, lon);
     const data2 = await getCurrentWeather(lat, lon);
